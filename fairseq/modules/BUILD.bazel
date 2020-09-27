@@ -1,24 +1,18 @@
 load("@py_deps//:requirements.bzl", "requirement")
 
 py_library(
-    name = "gelu",
+    name = "modules",
     srcs = [
+        "fp32_group_norm.py",
         "gelu.py",
-    ],
-    visibility = ["//visibility:public"],
-    deps = [
-        requirement("torch"),
-    ],
-)
-
-py_library(
-    name = "multihead_attention",
-    srcs = [
+        "grad_multiply.py",
+        "gumbel_vector_quantizer.py",
+        "layer_norm.py",
         "multihead_attention.py",
     ],
     visibility = ["//visibility:public"],
     deps = [
-        requirement("numpy"),
         requirement("torch"),
+        requirement("numpy"),
     ],
 )

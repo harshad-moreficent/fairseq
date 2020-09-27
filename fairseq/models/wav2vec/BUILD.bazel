@@ -10,6 +10,6 @@ py_library(
         "//:utils",
         "//data:data_utils",
         "//models:fairseq_model",
-        "//models:model_registry"
+        "//models:model_registry",
     ],
 )
