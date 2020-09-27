@@ -1,5 +1,6 @@
 load("@com_github_bazelbuild_buildtools//buildifier:def.bzl", "buildifier")
 load("@rules_python//python:defs.bzl", "py_runtime_pair")
+load("@py_deps//:requirements.bzl", "requirement")
 
 buildifier(
     name = "buildifier",
@@ -30,11 +31,31 @@ py_library(
     srcs = glob(["utils.py"]),
     visibility = ["//visibility:public"],
     deps = [
-        "//data",
-        "//logext",
-        "//modules",
+        requirement("numpy"),
+        requirement("torch"),
     ],
 )
+
+py_library(
+    name = "file_io",
+    srcs = glob(["file_io.py"]),
+    visibility = ["//visibility:public"],
+)
+
+py_library(
+    name = "checkpoint_utils",
+    srcs = glob(["checkpoint_utils.py"]),
+    visibility = ["//visibility:public"],
+    deps = [
+        ":file_io",
+        "//models:fairseq_decoder",
+        "//models:fairseq_encoder",
+        requirement("torch"),
+        requirement("numpy"),
+    ],
+)
+
+#####################
 
 py_library(
     name = "binarizer",
@@ -45,12 +66,6 @@ py_library(
 py_library(
     name = "tokenizer",
     srcs = glob(["tokenizer.py"]),
-    visibility = ["//visibility:public"],
-)
-
-py_library(
-    name = "file_io",
-    srcs = glob(["file_io.py"]),
     visibility = ["//visibility:public"],
 )
 

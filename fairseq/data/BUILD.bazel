@@ -1,13 +1,20 @@
+load("@py_deps//:requirements.bzl", "requirement")
+
 py_library(
-    name = "data",
-    srcs = glob(["*.py"]),
+    name = "data_utils",
+    srcs = ["data_utils.py"],
     visibility = ["//visibility:public"],
     deps = [
-        "//:binarizer",
-        "//:distributed_utils",
-        "//:file_io",
-        "//:tokenizer",
-        "//data/audio",
-        "//data/multilingual",
+        requirement("torch"),
+        requirement("numpy"),
+    ],
+)
+
+py_library(
+    name = "iterators",
+    srcs = glob(["iterators.py"]),
+    visibility = ["//visibility:public"],
+    deps = [
+        ":data_utils",
     ],
 )

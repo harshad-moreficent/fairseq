@@ -18,10 +18,10 @@ from typing import Callable, Dict, List, Optional
 import numpy as np
 import torch
 import torch.nn.functional as F
-from fairseq.data import iterators
-from fairseq.logext.meters import safe_round
-from fairseq.modules import gelu, gelu_accurate
-from fairseq.modules.multihead_attention import MultiheadAttention
+# from fairseq.data import iterators
+# from fairseq.logext.meters import safe_round
+# from fairseq.modules.gelu import gelu, gelu_accurate
+# from fairseq.modules.multihead_attention import MultiheadAttention
 from torch import Tensor
 
 try:
@@ -96,27 +96,27 @@ def move_to_cpu(sample):
     return apply_to_sample(_move_to_cpu, sample)
 
 
-def get_incremental_state(
-    module: MultiheadAttention,
-    incremental_state: Optional[Dict[str, Dict[str, Optional[Tensor]]]],
-    key: str,
-) -> Optional[Dict[str, Optional[Tensor]]]:
-    """Helper for getting incremental state for an nn.Module."""
-    return module.get_incremental_state(incremental_state, key)
+# def get_incremental_state(
+#     module: MultiheadAttention,
+#     incremental_state: Optional[Dict[str, Dict[str, Optional[Tensor]]]],
+#     key: str,
+# ) -> Optional[Dict[str, Optional[Tensor]]]:
+#     """Helper for getting incremental state for an nn.Module."""
+#     return module.get_incremental_state(incremental_state, key)
 
 
-def set_incremental_state(
-    module: MultiheadAttention,
-    incremental_state: Optional[Dict[str, Dict[str, Optional[Tensor]]]],
-    key: str,
-    value: Dict[str, Optional[Tensor]],
-) -> Optional[Dict[str, Dict[str, Optional[Tensor]]]]:
-    """Helper for setting incremental state for an nn.Module."""
-    if incremental_state is not None:
-        result = module.set_incremental_state(incremental_state, key, value)
-        if result is not None:
-            incremental_state = result
-    return incremental_state
+# def set_incremental_state(
+#     module: MultiheadAttention,
+#     incremental_state: Optional[Dict[str, Dict[str, Optional[Tensor]]]],
+#     key: str,
+#     value: Dict[str, Optional[Tensor]],
+# ) -> Optional[Dict[str, Dict[str, Optional[Tensor]]]]:
+#     """Helper for setting incremental state for an nn.Module."""
+#     if incremental_state is not None:
+#         result = module.set_incremental_state(incremental_state, key, value)
+#         if result is not None:
+#             incremental_state = result
+#     return incremental_state
 
 
 def load_align_dict(replace_unk):

@@ -7,20 +7,20 @@ import argparse
 import importlib
 import os
 
-from fairseq.models.fairseq_decoder import FairseqDecoder
-from fairseq.models.fairseq_encoder import FairseqEncoder
-from fairseq.models.fairseq_incremental_decoder import FairseqIncrementalDecoder
+# from fairseq.models.fairseq_decoder import FairseqDecoder
+# from fairseq.models.fairseq_encoder import FairseqEncoder
+# from fairseq.models.fairseq_incremental_decoder import FairseqIncrementalDecoder
 from fairseq.models.fairseq_model import (
     BaseFairseqModel,
-    FairseqEncoderModel,
-    FairseqEncoderDecoderModel,
-    FairseqLanguageModel,
-    FairseqModel,
-    FairseqMultiModel,
+#     FairseqEncoderModel,
+#     FairseqEncoderDecoderModel,
+#     FairseqLanguageModel,
+#     FairseqModel,
+#     FairseqMultiModel,
 )
 
-from fairseq.models.composite_encoder import CompositeEncoder
-from fairseq.models.distributed_fairseq_model import DistributedFairseqModel
+# from fairseq.models.composite_encoder import CompositeEncoder
+# from fairseq.models.distributed_fairseq_model import DistributedFairseqModel
 
 
 MODEL_REGISTRY = {}
@@ -33,16 +33,16 @@ ARCH_DATACLASS_REGISTRY = {}
 
 __all__ = [
     'BaseFairseqModel',
-    'CompositeEncoder',
-    'DistributedFairseqModel',
-    'FairseqDecoder',
-    'FairseqEncoder',
-    'FairseqEncoderDecoderModel',
-    'FairseqEncoderModel',
-    'FairseqIncrementalDecoder',
-    'FairseqLanguageModel',
-    'FairseqModel',
-    'FairseqMultiModel',
+#     'CompositeEncoder',
+#     'DistributedFairseqModel',
+#     'FairseqDecoder',
+#     'FairseqEncoder',
+#     'FairseqEncoderDecoderModel',
+#     'FairseqEncoderModel',
+#     'FairseqIncrementalDecoder',
+#     'FairseqLanguageModel',
+#     'FairseqModel',
+#     'FairseqMultiModel',
 ]
 
 
@@ -121,23 +121,23 @@ def register_model_architecture(model_name, arch_name):
     return register_model_arch_fn
 
 
-# automatically import any Python files in the models/ directory
-models_dir = os.path.dirname(__file__)
-for file in os.listdir(models_dir):
-    path = os.path.join(models_dir, file)
-    if (
-        not file.startswith('_')
-        and not file.startswith('.')
-        and (file.endswith('.py') or os.path.isdir(path))
-    ):
-        model_name = file[:file.find('.py')] if file.endswith('.py') else file
-        module = importlib.import_module('fairseq.models.' + model_name)
+# # automatically import any Python files in the models/ directory
+# models_dir = os.path.dirname(__file__)
+# for file in os.listdir(models_dir):
+#     path = os.path.join(models_dir, file)
+#     if (
+#         not file.startswith('_')
+#         and not file.startswith('.')
+#         and (file.endswith('.py') or os.path.isdir(path))
+#     ):
+#         model_name = file[:file.find('.py')] if file.endswith('.py') else file
+#         module = importlib.import_module('fairseq.models.' + model_name)
 
-        # extra `model_parser` for sphinx
-        if model_name in MODEL_REGISTRY:
-            parser = argparse.ArgumentParser(add_help=False)
-            group_archs = parser.add_argument_group('Named architectures')
-            group_archs.add_argument('--arch', choices=ARCH_MODEL_INV_REGISTRY[model_name])
-            group_args = parser.add_argument_group('Additional command-line arguments')
-            MODEL_REGISTRY[model_name].add_args(group_args)
-            globals()[model_name + '_parser'] = parser
+#         # extra `model_parser` for sphinx
+#         if model_name in MODEL_REGISTRY:
+#             parser = argparse.ArgumentParser(add_help=False)
+#             group_archs = parser.add_argument_group('Named architectures')
+#             group_archs.add_argument('--arch', choices=ARCH_MODEL_INV_REGISTRY[model_name])
+#             group_args = parser.add_argument_group('Additional command-line arguments')
+#             MODEL_REGISTRY[model_name].add_args(group_args)
+#             globals()[model_name + '_parser'] = parser
