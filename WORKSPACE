@@ -3,7 +3,7 @@ workspace(
 )
 
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
-load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+load("//customrules:http_archive_ext.bzl", "http_archive_ext")
 
 http_archive(
     name = "rules_python",
@@ -81,43 +81,44 @@ load("@bazel_skylib//:workspace.bzl", "bazel_skylib_workspace")
 
 bazel_skylib_workspace()
 
-# http_archive_ext(
-#     name = "python38",
-#     build_file_content = """
-# exports_files(["python_bin"])
-# filegroup(
-#     name = "files",
-#     srcs = glob(["bazel_install/**"], exclude = ["**/* *"]),
-#     visibility = ["//visibility:public"],
-# )
-# """,
-#     patch_cmds = [
-#         "mkdir $(pwd)/bazel_install",
-#         "./configure --prefix=$(pwd)/bazel_install --enable-optimizations --enable-shared --enable-option-checking=fatal --with-lto --with-system-expat --with-system-ffi",
-#         "make -j6",
-#         "make install",
-#         "ln -s bazel_install/bin/python3 python_bin",
-#     ],
-#     sha256 = "e3003ed57db17e617acb382b0cade29a248c6026b1bd8aad1f976e9af66a83b0",
-#     strip_prefix = "Python-3.8.5",
-#     urls = [
-#         "https://www.python.org/ftp/python/3.8.5/Python-3.8.5.tar.xz",
-#     ],
-#     workspace_file_content = PKG_WORKSPACE,
-# )
+http_archive_ext(
+    name = "python38",
+    build_file_content = """
+exports_files(["python_bin"])
+filegroup(
+    name = "files",
+    srcs = glob(["bazel_install/**"], exclude = ["**/* *"]),
+    visibility = ["//visibility:public"],
+)
+""",
+    patch_cmds = [
+        "mkdir $(pwd)/bazel_install",
+        "./configure --prefix=$(pwd)/bazel_install --enable-optimizations --enable-shared --enable-option-checking=fatal --with-lto --with-system-expat --with-system-ffi",
+        "make -j6",
+        "make install",
+        "ln -s bazel_install/bin/python3 python_bin",
+    ],
+    sha256 = "e3003ed57db17e617acb382b0cade29a248c6026b1bd8aad1f976e9af66a83b0",
+    strip_prefix = "Python-3.8.5",
+    urls = [
+        "https://www.python.org/ftp/python/3.8.5/Python-3.8.5.tar.xz",
+    ],
+)
 
-# load("@rules_python//python:pip.bzl", "pip_repositories")
+load("@rules_python//python:pip.bzl", "pip_repositories")
 
-# pip_repositories()
+pip_repositories()
 
-# load("@rules_python//python:pip.bzl", "pip_import")
+load("@rules_python//python:pip.bzl", "pip_import")
 
-# pip_import(
-#     name = "py_deps",
-#     python_interpreter_target = "@python38//:python_bin",
-#     requirements = "//:requirements.txt",
-# )
+pip_import(
+    name = "py_deps",
+    python_interpreter_target = "@python38//:python_bin",
+    requirements = "//:requirements.txt",
+)
 
-# load("@py_deps//:requirements.bzl", "pip_install")
+load("@py_deps//:requirements.bzl", "pip_install")
 
-# pip_install()
+pip_install()
+
+register_toolchains("//:py38_toolchain")
