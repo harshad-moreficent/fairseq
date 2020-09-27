@@ -7,10 +7,10 @@ import argparse
 import importlib
 import os
 
-from .fairseq_decoder import FairseqDecoder
-from .fairseq_encoder import FairseqEncoder
-from .fairseq_incremental_decoder import FairseqIncrementalDecoder
-from .fairseq_model import (
+from fairseq.models.fairseq_decoder import FairseqDecoder
+from fairseq.models.fairseq_encoder import FairseqEncoder
+from fairseq.models.fairseq_incremental_decoder import FairseqIncrementalDecoder
+from fairseq.models.fairseq_model import (
     BaseFairseqModel,
     FairseqEncoderModel,
     FairseqEncoderDecoderModel,
@@ -19,8 +19,8 @@ from .fairseq_model import (
     FairseqMultiModel,
 )
 
-from .composite_encoder import CompositeEncoder
-from .distributed_fairseq_model import DistributedFairseqModel
+from fairseq.models.composite_encoder import CompositeEncoder
+from fairseq.models.distributed_fairseq_model import DistributedFairseqModel
 
 
 MODEL_REGISTRY = {}

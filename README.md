@@ -1,4 +1,7 @@
-This fork adds support for projects built with Bazel. 
+This fork adds support for projects built with Bazel. Additional changes:
+
+1. Rename logging to logext, this avoided a weird conflict with the standard logging module
+
 
 ---
 

@@ -1,0 +1,17 @@
+load("@py_deps//:requirements.bzl", "requirement")
+
+py_library(
+    name = "modules",
+    srcs = [
+        "__init__.py",
+        "fairseq_dropout.py",
+        "gelu.py",
+        "multihead_attention.py",
+        "quant_noise.py"
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("torch"),
+        "//:incremental_decoding_utils",
+    ],
+)

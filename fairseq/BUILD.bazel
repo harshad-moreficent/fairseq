@@ -1,0 +1,67 @@
+load("@com_github_bazelbuild_buildtools//buildifier:def.bzl", "buildifier")
+load("@rules_python//python:defs.bzl", "py_runtime_pair")
+
+buildifier(
+    name = "buildifier",
+)
+
+py_runtime(
+    name = "python38_runtime",
+    files = ["@python38//:files"],
+    interpreter = "@python38//:python_bin",
+    python_version = "PY3",
+    visibility = ["//visibility:public"],
+)
+
+py_runtime_pair(
+    name = "py38_runtime_pair",
+    py2_runtime = None,
+    py3_runtime = ":python38_runtime",
+)
+
+toolchain(
+    name = "py38_toolchain",
+    toolchain = ":py38_runtime_pair",
+    toolchain_type = "@bazel_tools//tools/python:toolchain_type",
+)
+
+py_library(
+    name = "utils",
+    srcs = glob(["utils.py"]),
+    visibility = ["//visibility:public"],
+    deps = [
+        "//data",
+        "//logext",
+        "//modules",
+    ],
+)
+
+py_library(
+    name = "binarizer",
+    srcs = glob(["binarizer.py"]),
+    visibility = ["//visibility:public"],
+)
+
+py_library(
+    name = "tokenizer",
+    srcs = glob(["tokenizer.py"]),
+    visibility = ["//visibility:public"],
+)
+
+py_library(
+    name = "file_io",
+    srcs = glob(["file_io.py"]),
+    visibility = ["//visibility:public"],
+)
+
+py_library(
+    name = "distributed_utils",
+    srcs = glob(["distributed_utils.py"]),
+    visibility = ["//visibility:public"],
+)
+
+py_library(
+    name = "incremental_decoding_utils",
+    srcs = glob(["incremental_decoding_utils.py"]),
+    visibility = ["//visibility:public"],
+)

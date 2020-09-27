@@ -1,0 +1,13 @@
+py_library(
+    name = "data",
+    srcs = glob(["*.py"]),
+    visibility = ["//visibility:public"],
+    deps = [
+        "//:binarizer",
+        "//:distributed_utils",
+        "//:file_io",
+        "//:tokenizer",
+        "//data/audio",
+        "//data/multilingual",
+    ],
+)

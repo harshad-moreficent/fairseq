@@ -1,0 +1,10 @@
+load("@py_deps//:requirements.bzl", "requirement")
+
+py_library(
+    name = "logext",
+    srcs = glob(["*.py"]),
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("torch"),
+    ],
+)

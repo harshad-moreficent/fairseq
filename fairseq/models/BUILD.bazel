@@ -1,0 +1,18 @@
+load("@py_deps//:requirements.bzl", "requirement")
+
+py_library(
+    name = "models",
+    srcs = [
+        "__init__.py",
+        "composite_encoder.py",
+        "distributed_fairseq_model.py",
+        "fairseq_decoder.py",
+        "fairseq_encoder.py",
+        "fairseq_incremental_decoder.py",
+        "fairseq_model.py",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//:utils",
+    ],
+)
