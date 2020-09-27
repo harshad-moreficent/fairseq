@@ -1,7 +1,7 @@
 load("@py_deps//:requirements.bzl", "requirement")
 
 py_library(
-    name = "base",
+    name = "fairseq_model",
     srcs = [
         "fairseq_model.py",
     ],
@@ -9,7 +9,11 @@ py_library(
     deps = [
         requirement("torch"),
         requirement("numpy"),
+        ":fairseq_decoder",
+        ":fairseq_encoder",
+        "//:checkpoint_utils",
         "//:utils",
+        "//data:dictionary",
     ],
 )
 

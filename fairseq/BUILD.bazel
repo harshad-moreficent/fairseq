@@ -55,19 +55,25 @@ py_library(
     ],
 )
 
-#####################
-
-py_library(
-    name = "binarizer",
-    srcs = glob(["binarizer.py"]),
-    visibility = ["//visibility:public"],
-)
-
 py_library(
     name = "tokenizer",
     srcs = glob(["tokenizer.py"]),
     visibility = ["//visibility:public"],
 )
+
+py_library(
+    name = "binarizer",
+    srcs = glob(["binarizer.py"]),
+    visibility = ["//visibility:public"],
+    deps = [
+        ":file_io",
+        ":tokenizer",
+        requirement("torch"),
+        requirement("numpy"),
+    ],
+)
+
+#####################
 
 py_library(
     name = "distributed_utils",

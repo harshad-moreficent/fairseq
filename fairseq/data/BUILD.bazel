@@ -11,6 +11,21 @@ py_library(
 )
 
 py_library(
+    name = "dictionary",
+    srcs = ["dictionary.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("torch"),
+        requirement("numpy"),
+        ":data_utils",
+        "//:binarizer",
+        "//:file_io",
+        "//:tokenizer",
+        "//:utils",
+    ],
+)
+
+py_library(
     name = "iterators",
     srcs = glob(["iterators.py"]),
     visibility = ["//visibility:public"],

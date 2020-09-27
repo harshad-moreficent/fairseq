@@ -14,8 +14,9 @@ import torch.nn as nn
 import torch.nn.functional as F
 from fairseq import utils
 from fairseq.checkpoint_utils import prune_state_dict
-from fairseq.data import Dictionary
-from fairseq.models import FairseqDecoder, FairseqEncoder
+from fairseq.data.dictionary import Dictionary
+from fairseq.models.fairseq_decoder import FairseqDecoder
+from fairseq.models.fairseq_encoder import FairseqEncoder
 from torch import Tensor
 
 
