@@ -20,7 +20,7 @@ import torch
 import torch.nn.functional as F
 # from fairseq.data import iterators
 # from fairseq.logext.meters import safe_round
-# from fairseq.modules.gelu import gelu, gelu_accurate
+from fairseq.modules.gelu import gelu, gelu_accurate
 # from fairseq.modules.multihead_attention import MultiheadAttention
 from torch import Tensor
 
