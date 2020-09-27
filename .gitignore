@@ -130,3 +130,9 @@ data-bin/
 
 # Experimental Folder
 experimental/*
+
+# Bazel
+bazel-bin
+bazel-fairseq
+bazel-out
+bazel-testlogs
