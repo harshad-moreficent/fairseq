@@ -1,18 +1,104 @@
 load("@py_deps//:requirements.bzl", "requirement")
+load(":simple_module.bzl", "simple_module")
+
+simple_module("gelu")
+
+simple_module("fp32_group_norm")
+
+simple_module("layer_norm")
+
+simple_module("grad_multiply")
+
+simple_module("gumbel_vector_quantizer")
+
+simple_module("fairseq_dropout")
+
+simple_module("quant_noise")
+
+simple_module("same_pad")
+
+simple_module("transpose_last")
+
+simple_module("layer_drop")
 
 py_library(
-    name = "modules",
+    name = "multihead_attention",
     srcs = [
-        "fp32_group_norm.py",
-        "gelu.py",
-        "grad_multiply.py",
-        "gumbel_vector_quantizer.py",
-        "layer_norm.py",
         "multihead_attention.py",
     ],
     visibility = ["//visibility:public"],
     deps = [
-        requirement("torch"),
+        ":fairseq_dropout",
+        ":quant_noise",
+        "//:incremental_decoding_utils",
+        "//:utils",
         requirement("numpy"),
+        requirement("torch"),
+    ],
+)
+
+py_library(
+    name = "learned_positional_embedding",
+    srcs = ["learned_positional_embedding.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//:utils",
+        requirement("numpy"),
+        requirement("torch"),
+    ],
+)
+
+py_library(
+    name = "sinusoidal_positional_embedding",
+    srcs = ["sinusoidal_positional_embedding.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//:utils",
+        requirement("numpy"),
+        requirement("torch"),
+    ],
+)
+
+py_library(
+    name = "positional_embedding",
+    srcs = ["positional_embedding.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":learned_positional_embedding",
+        ":sinusoidal_positional_embedding",
+        requirement("numpy"),
+        requirement("torch"),
+    ],
+)
+
+py_library(
+    name = "transformer_sentence_encoder_layer",
+    srcs = ["transformer_sentence_encoder_layer.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":fairseq_dropout",
+        ":layer_norm",
+        ":multihead_attention",
+        ":quant_noise",
+        "//:utils",
+        requirement("numpy"),
+        requirement("torch"),
+    ],
+)
+
+py_library(
+    name = "transformer_sentence_encoder",
+    srcs = ["transformer_sentence_encoder.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":fairseq_dropout",
+        ":layer_drop",
+        ":layer_norm",
+        ":multihead_attention",
+        ":positional_embedding",
+        ":transformer_sentence_encoder_layer",
+        ":quant_noise",
+        requirement("numpy"),
+        requirement("torch"),
     ],
 )

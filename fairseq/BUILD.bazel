@@ -28,7 +28,7 @@ toolchain(
 
 py_library(
     name = "utils",
-    srcs = glob(["utils.py"]),
+    srcs = ["utils.py"],
     visibility = ["//visibility:public"],
     deps = [
         requirement("numpy"),
@@ -38,13 +38,13 @@ py_library(
 
 py_library(
     name = "file_io",
-    srcs = glob(["file_io.py"]),
+    srcs = ["file_io.py"],
     visibility = ["//visibility:public"],
 )
 
 py_library(
     name = "checkpoint_utils",
-    srcs = glob(["checkpoint_utils.py"]),
+    srcs = ["checkpoint_utils.py"],
     visibility = ["//visibility:public"],
     deps = [
         ":file_io",
@@ -57,17 +57,27 @@ py_library(
 
 py_library(
     name = "tokenizer",
-    srcs = glob(["tokenizer.py"]),
+    srcs = ["tokenizer.py"],
     visibility = ["//visibility:public"],
 )
 
 py_library(
     name = "binarizer",
-    srcs = glob(["binarizer.py"]),
+    srcs = ["binarizer.py"],
     visibility = ["//visibility:public"],
     deps = [
         ":file_io",
         ":tokenizer",
+        requirement("torch"),
+        requirement("numpy"),
+    ],
+)
+
+py_library(
+    name = "incremental_decoding_utils",
+    srcs = ["incremental_decoding_utils.py"],
+    visibility = ["//visibility:public"],
+    deps = [
         requirement("torch"),
         requirement("numpy"),
     ],
@@ -78,11 +88,5 @@ py_library(
 py_library(
     name = "distributed_utils",
     srcs = glob(["distributed_utils.py"]),
-    visibility = ["//visibility:public"],
-)
-
-py_library(
-    name = "incremental_decoding_utils",
-    srcs = glob(["incremental_decoding_utils.py"]),
     visibility = ["//visibility:public"],
 )

@@ -17,16 +17,13 @@ from fairseq import utils
 from fairseq.data.data_utils import compute_mask_indices
 from fairseq.models.fairseq_model import BaseFairseqModel
 from fairseq.models.model_registry import register_model, register_model_architecture
-from fairseq.modules import (
-    Fp32GroupNorm,
-    Fp32LayerNorm,
-    GradMultiply,
-    GumbelVectorQuantizer,
-    LayerNorm,
-    MultiheadAttention,
-    SamePad,
-    TransposeLast,
-)
+from fairseq.modules.fp32_group_norm import Fp32GroupNorm
+from fairseq.modules.layer_norm import Fp32LayerNorm, LayerNorm
+from fairseq.modules.grad_multiply import GradMultiply
+from fairseq.modules.gumbel_vector_quantizer import GumbelVectorQuantizer
+from fairseq.modules.multihead_attention import MultiheadAttention
+from fairseq.modules.same_pad import SamePad
+from fairseq.modules.transpose_last import TransposeLast
 from fairseq.modules.transformer_sentence_encoder import init_bert_params
 from fairseq.utils import buffered_arange
 

@@ -11,5 +11,13 @@ py_library(
         "//data:data_utils",
         "//models:fairseq_model",
         "//models:model_registry",
+        "//modules:fp32_group_norm",
+        "//modules:grad_multiply",
+        "//modules:gumbel_vector_quantizer",
+        "//modules:layer_norm",
+        "//modules:multihead_attention",
+        "//modules:same_pad",
+        "//modules:transpose_last",
+        "//modules:transformer_sentence_encoder"
     ],
 )

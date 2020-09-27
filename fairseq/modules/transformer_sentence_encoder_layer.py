@@ -9,13 +9,10 @@ import torch
 import torch.nn as nn
 
 from fairseq import utils
-from fairseq.modules import (
-    LayerNorm,
-    MultiheadAttention,
-)
+from fairseq.modules.layer_norm import LayerNorm
+from fairseq.modules.multihead_attention import MultiheadAttention
 from fairseq.modules.quant_noise import quant_noise
 from fairseq.modules.fairseq_dropout import FairseqDropout
-
 
 
 class TransformerSentenceEncoderLayer(nn.Module):
