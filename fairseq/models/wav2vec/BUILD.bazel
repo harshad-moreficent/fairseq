@@ -2,10 +2,14 @@ load("@py_deps//:requirements.bzl", "requirement")
 
 py_library(
     name = "wav2vec",
-    srcs = glob(["*.py"]),
+    srcs = glob(["wav2vec2.py"]),
     visibility = ["//visibility:public"],
     deps = [
         requirement("torch"),
         requirement("numpy"),
+        "//:utils",
+        "//data:data_utils",
+        "//models:fairseq_model",
+        "//models:model_registry"
     ],
 )

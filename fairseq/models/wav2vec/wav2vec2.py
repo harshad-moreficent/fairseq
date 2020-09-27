@@ -15,7 +15,8 @@ from typing import List, Tuple
 
 from fairseq import utils
 from fairseq.data.data_utils import compute_mask_indices
-from fairseq.models import BaseFairseqModel, register_model, register_model_architecture
+from fairseq.models.fairseq_model import BaseFairseqModel
+from fairseq.models.model_registry import register_model, register_model_architecture
 from fairseq.modules import (
     Fp32GroupNorm,
     Fp32LayerNorm,

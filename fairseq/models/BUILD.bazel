@@ -41,3 +41,14 @@ py_library(
         "//:utils",
     ],
 )
+
+py_library(
+    name = "model_registry",
+    srcs = [
+        "model_registry.py"
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":fairseq_model",
+    ],
+)
